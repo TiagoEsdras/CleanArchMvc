@@ -15,6 +15,7 @@ namespace CleanArchMvc.Infra.Data.Context
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+            // used the ApplyConfigurationsFromAssembly method to search and apply all configurations type of IEntityTypeConfiguration, without having to reference each one
             builder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
         }
     }
