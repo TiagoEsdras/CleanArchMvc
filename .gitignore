@@ -277,3 +277,4 @@ Thumbs.db
 #####
 # End of core ignore list, below put you custom 'per project' settings (patterns or path)
 #####
+/CleanArchMvc/CleanArchMvc.WebUI/appsettings.Local.json
