@@ -1,6 +1,7 @@
 ﻿using CleanArchMvc.Application.DTOs;
 using CleanArchMvc.Application.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Threading.Tasks;
 
 namespace CleanArchMvc.WebUI.Controllers
@@ -33,6 +34,38 @@ namespace CleanArchMvc.WebUI.Controllers
             if (ModelState.IsValid)
             {
                 await categoryService.Add(categoryDto);
+                return RedirectToAction(nameof(Index));
+            }
+
+            return View(categoryDto);
+        }
+
+        [HttpGet()]
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id is null) return NotFound();
+
+            var category = await categoryService.GetById(id);
+
+            if (category is null) return NotFound();
+
+            return View(category);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(CategoryDto categoryDto)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    await categoryService.Update(categoryDto);
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+
                 return RedirectToAction(nameof(Index));
             }
 
