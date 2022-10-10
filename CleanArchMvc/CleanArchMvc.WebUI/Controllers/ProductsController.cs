@@ -42,5 +42,31 @@ namespace CleanArchMvc.WebUI.Controllers
 
             return View(productDto);
         }
+
+        [HttpGet()]
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id is null) return NotFound();
+
+            var product = await productService.GetById(id);
+
+            if (product is null) return NotFound();
+
+            ViewBag.CategoryId = new SelectList(await categoryService.GetCategories(), "Id", "Name", product.CategoryId);
+
+            return View(product);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(ProductDto productDto)
+        {
+            if (ModelState.IsValid)
+            {
+                await productService.Update(productDto);
+                return RedirectToAction(nameof(Index));
+            }
+
+            return View(productDto);
+        }
     }
 }
