@@ -1,3 +1,4 @@
+using CleanArchMvc.Infra.IoC;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -18,6 +19,7 @@ namespace CleanArchMvc.API
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddInfrastructureAPI(Configuration);
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
