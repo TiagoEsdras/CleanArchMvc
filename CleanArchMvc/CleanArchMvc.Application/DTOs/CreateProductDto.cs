@@ -1,15 +1,11 @@
-﻿using CleanArchMvc.Domain.Entities;
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text.Json.Serialization;
 
 namespace CleanArchMvc.Application.DTOs
 {
-    public class ProductDto
+    public class CreateProductDto
     {
-        public int Id { get; set; }
-
         [Required(ErrorMessage = "Name is required")]
         [MinLength(3)]
         [MaxLength(100)]
@@ -34,8 +30,5 @@ namespace CleanArchMvc.Application.DTOs
         public string Image { get; set; }
 
         public int CategoryId { get; set; }
-
-        [JsonIgnore]
-        public Category Category { get; set; }
     }
 }

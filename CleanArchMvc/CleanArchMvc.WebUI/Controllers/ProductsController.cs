@@ -36,7 +36,7 @@ namespace CleanArchMvc.WebUI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(ProductDto productDto)
+        public async Task<IActionResult> Create(CreateProductDto productDto)
         {
             if (ModelState.IsValid)
             {

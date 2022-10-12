@@ -39,10 +39,11 @@ namespace CleanArchMvc.Application.Services
             return mapper.Map<IEnumerable<ProductDto>>(result);
         }
 
-        public async Task Add(ProductDto productDto)
+        public async Task<ProductDto> Add(CreateProductDto productDto)
         {
             var productCreateCommand = mapper.Map<ProductCreateCommand>(productDto);
-            await mediator.Send(productCreateCommand);
+            var productCreated = await mediator.Send(productCreateCommand);
+            return mapper.Map<ProductDto>(productCreated);
         }
 
         public async Task Update(ProductDto productDto)
