@@ -29,7 +29,7 @@ namespace CleanArchMvc.WebUI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(CategoryDto categoryDto)
+        public async Task<IActionResult> Create(CreateCategoryDto categoryDto)
         {
             if (ModelState.IsValid)
             {
