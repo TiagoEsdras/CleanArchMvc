@@ -10,7 +10,7 @@ namespace CleanArchMvc.Application.Interfaces
 
         Task<IEnumerable<CategoryDto>> GetCategories();
 
-        Task Add(CategoryDto categoryDto);
+        Task<CategoryDto> Add(CreateCategoryDto categoryDto);
 
         Task Update(CategoryDto categoryDto);
 
