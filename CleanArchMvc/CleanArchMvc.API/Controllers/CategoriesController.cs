@@ -56,5 +56,17 @@ namespace CleanArchMvc.API.Controllers
 
             return Ok(categoryDto);
         }
+
+        [HttpDelete]
+        public async Task<ActionResult> Delete(int id)
+        {
+            var category = await categoryService.GetById(id);
+
+            if (category is null) return NotFound("Category not found");
+
+            await categoryService.Remove(id);
+
+            return NoContent();
+        }
     }
 }
