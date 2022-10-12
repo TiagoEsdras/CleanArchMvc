@@ -27,7 +27,7 @@ namespace CleanArchMvc.API.Controllers
             return Ok(categories);
         }
 
-        [HttpGet("id", Name = "GetCategory")]
+        [HttpGet("{id}", Name = "GetCategory")]
         public async Task<ActionResult<CategoryDto>> Get(int id)
         {
             var category = await categoryService.GetById(id);
@@ -47,7 +47,7 @@ namespace CleanArchMvc.API.Controllers
             return new CreatedAtRouteResult("GetCategory", new { id = categoryCreated.Id }, categoryCreated);
         }
 
-        [HttpPut("id")]
+        [HttpPut("{id}")]
         public async Task<ActionResult<CategoryDto>> Put(int id, [FromBody] CategoryDto categoryDto)
         {
             if (categoryDto is null || id != categoryDto.Id) return BadRequest();
@@ -57,7 +57,7 @@ namespace CleanArchMvc.API.Controllers
             return Ok(categoryDto);
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
         {
             var category = await categoryService.GetById(id);
