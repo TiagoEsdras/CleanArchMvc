@@ -1,3 +1,4 @@
+using CleanArchMvc.Domain.Account;
 using CleanArchMvc.Infra.IoC;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
@@ -25,7 +26,7 @@ namespace CleanArchMvc.API
             });
         }
 
-        public void Configure(IApplicationBuilder app)
+        public void Configure(IApplicationBuilder app, ISeedUserRoleInitial seedUserRoleInitial)
         {
             app.UseDeveloperExceptionPage();
             app.UseSwagger();
@@ -34,6 +35,9 @@ namespace CleanArchMvc.API
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            seedUserRoleInitial.SeedRoles();
+            seedUserRoleInitial.SeedUsers();
 
             app.UseAuthorization();
 
