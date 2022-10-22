@@ -24,20 +24,28 @@ namespace CleanArchMvc.API.Controllers
             this.configuration = configuration;
         }
 
-        [HttpPost("login")]
+        [HttpPost("Register")]
+        public async Task<ActionResult> Register([FromBody] RegisterModel registerInfo)
+        {
+            var result = await authenticate.RegisterUser(registerInfo.Email, registerInfo.Password);
+
+            if (result)
+                return Ok();
+
+            ModelState.AddModelError(string.Empty, "Invalid register attempt");
+            return BadRequest(ModelState);
+        }
+
+        [HttpPost("Login")]
         public async Task<ActionResult<UserToken>> Login([FromBody] LoginModel userInfo)
         {
             var result = await authenticate.Authenticate(userInfo.Email, userInfo.Password);
 
             if (result)
-            {
                 return GenerateToken(userInfo);
-            }
-            else
-            {
-                ModelState.AddModelError(string.Empty, "Invalid login attempt");
-                return BadRequest(ModelState);
-            }
+
+            ModelState.AddModelError(string.Empty, "Invalid login attempt");
+            return BadRequest(ModelState);
         }
 
         private UserToken GenerateToken(LoginModel userInfo)
