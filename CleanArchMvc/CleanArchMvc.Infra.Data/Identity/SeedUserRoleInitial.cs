@@ -49,7 +49,7 @@ namespace CleanArchMvc.Infra.Data.Identity
                 user.LockoutEnabled = true;
                 user.SecurityStamp = Guid.NewGuid().ToString();
 
-                var result = userManager.CreateAsync(user, "user@local123").Result;
+                var result = userManager.CreateAsync(user, "User@local123").Result;
 
                 if (result.Succeeded)
                     userManager.AddToRoleAsync(user, "User").Wait();
@@ -66,7 +66,7 @@ namespace CleanArchMvc.Infra.Data.Identity
                 user.LockoutEnabled = true;
                 user.SecurityStamp = Guid.NewGuid().ToString();
 
-                var result = userManager.CreateAsync(user, "admin@local123").Result;
+                var result = userManager.CreateAsync(user, "Admin@local123").Result;
 
                 if (result.Succeeded)
                     userManager.AddToRoleAsync(user, "Admin").Wait();
